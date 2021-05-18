@@ -5,9 +5,9 @@ DVITARGET = $(addsuffix .dvi,$(TARGET))
 MX2TARGET = $(addsuffix .mx2,$(TARGET))
 BIBTARGET = $(addsuffix .bbl,$(TARGET))
 MDXTARGET = $(addsuffix .ind,$(TARGET))
-DVIPDFMxOpt = -f otf-up-yu-win10_mod #otf-up-sourcehan #
+DVIPDFMxOpt =# -f otf-up-yu-win10_mod #otf-up-sourcehan #
 LOGSUFFIXES = .aux .log .toc .mx1 .mx2 .bcf .bbl .blg .idx .ind .ilg .out .run.xml
-LATEXENGINE := uplatex
+LATEXENGINE := lualatex
 DVIWARE := dvipdfmx
 
 define move
@@ -28,16 +28,25 @@ makeindex: $(MDXTARGET)
 .SUFFIXES: .pdf .dvi .tex .mx2 .mx1 .bbl .bcf .ind .idx
 
 ronbun.dvi: ronbun.tex ./ronbun/*.tex
-chord_rel.dvi: chord_rel.tex ./chord_rel/*.tex
 
+ifeq ($(LATEXENGINE),uplatex)
 %.dvi: %.tex
-	uplatex $(notdir $<)
+	uplatex "$(notdir $<)"
 	if [ -e $(basename $(notdir $<)).mx1 ]; then $(MAKE) -B $(basename $(notdir $<)).mx2; uplatex $(notdir $<) ;fi
 	if [ -e $(basename $(notdir $<)).bcf ]; then $(MAKE) -B $(basename $(notdir $<)).bbl; fi
 	if [ -e $(basename $(notdir $<)).idx ]; then $(MAKE) -B $(basename $(notdir $<)).ind; fi
-	uplatex $(notdir $<)
-	uplatex -synctex=1 $(notdir $<)
+	uplatex "$(notdir $<)"
+	uplatex -synctex=1 "$(notdir $<)"
 	$(MAKE) movelog TARGET=$(basename $(notdir $<))
+else
+%.pdf: %.tex
+	$(LATEXENGINE) "$(notdir $<)"
+	if [ -e $(basename $(notdir $<)).mx1 ]; then $(MAKE) -B $(basename $(notdir $<)).mx2; $(LATEXENGINE) "$(notdir $<)" ;fi
+	if [ -e $(basename $(notdir $<)).bcf ]; then $(MAKE) -B $(basename $(notdir $<)).bbl; fi
+	if [ -e $(basename $(notdir $<)).idx ]; then $(MAKE) -B $(basename $(notdir $<)).ind; fi
+	$(LATEXENGINE) -synctex=1 "$(notdir $<)"
+	$(MAKE) movelog TARGET=$(basename $(notdir $<))
+endif
 
 %.pdf: %.dvi
 	dvipdfmx $(DVIPDFMxOpt) $(notdir $<)
