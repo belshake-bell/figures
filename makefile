@@ -36,7 +36,7 @@ ifeq ($(LATEXENGINE),uplatex)
 	if [ -e $(basename $(notdir $<)).bcf ]; then $(MAKE) -B $(basename $(notdir $<)).bbl; fi
 	if [ -e $(basename $(notdir $<)).idx ]; then $(MAKE) -B $(basename $(notdir $<)).ind; fi
 	uplatex "$(notdir $<)"
-	uplatex -synctex=1 "$(notdir $<)"
+	uplatex "$(notdir $<)"
 	$(MAKE) movelog TARGET=$(basename $(notdir $<))
 else
 %.pdf: %.tex
@@ -44,7 +44,7 @@ else
 	if [ -e $(basename $(notdir $<)).mx1 ]; then $(MAKE) -B $(basename $(notdir $<)).mx2; $(LATEXENGINE) "$(notdir $<)" ;fi
 	if [ -e $(basename $(notdir $<)).bcf ]; then $(MAKE) -B $(basename $(notdir $<)).bbl; fi
 	if [ -e $(basename $(notdir $<)).idx ]; then $(MAKE) -B $(basename $(notdir $<)).ind; fi
-	$(LATEXENGINE) -synctex=1 "$(notdir $<)"
+	$(LATEXENGINE) "$(notdir $<)"
 	$(MAKE) movelog TARGET=$(basename $(notdir $<))
 endif
 
