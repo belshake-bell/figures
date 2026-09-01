@@ -1,4 +1,4 @@
-TARGET = $(basename $(filter-out HEADER.tex,$(wildcard *.tex)))
+TARGET = $(basename $(wildcard *.tex))
 SRC = $(addsuffix .tex,$(TARGET))
 PDFTARGET = $(addsuffix .pdf,$(TARGET))
 DVITARGET = $(addsuffix .dvi,$(TARGET))
