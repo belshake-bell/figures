@@ -5,8 +5,8 @@
 \usetikzlibrary{calc}
 
 \begin{document}
-\begin{tikzpicture}[scale=2]
-  \tikzset{every node/.style={shape=circle,text centered,inner sep=0pt,minimum size=0.5cm}};
+\begin{tikzpicture}[scale=3]
+  \tikzset{every node/.style={shape=circle,font=\small,text centered,inner sep=0pt,minimum size=0.5cm}};
   \node (T) at (0,0){\clap{C}};
   \node (D) at (1,0){\clap{G}};
   \node (S) at (-1,0){\clap{F}};
@@ -34,7 +34,26 @@
   \node (EMin)  at ($0.334*(DM) +0.333*(D)  +0.333*(M)$){E Min};
   \node (AMin)  at ($0.334*(T)  +0.333*(SM) +0.333*(M)$){A Min};
   \node (CMin)  at ($0.334*(T)  +0.333*(D)  +0.333*(m)$){C Min};
-% \draw[red,font=\tiny,arrows={->}] (DM) -- (T) node[midway,sloped,above]{lead-tone};
+  \draw[red,font=\tiny,arrows={<->}]
+    ($(CMaj.center)!0.3!(AMin.center)$)
+      -- ($(CMaj.center)!0.7!(AMin.center)$)
+      node[midway,sloped,above,font=\tiny]{R-trans.};
+  \draw[red,font=\tiny,arrows={<->}]
+    ($(CMaj.center)!0.3!(EMin.center)$)
+      -- ($(CMaj.center)!0.7!(EMin.center)$)
+      node[midway,sloped,above,font=\tiny]{L-trans.};
+  \draw[red,font=\tiny,arrows={<->}]
+    ($(CMaj.center)!0.3!(CMin.center)$)
+      -- ($(CMaj.center)!0.7!(CMin.center)$)
+      node[midway,sloped,above,font=\tiny]{P-trans.};
+  \draw[red,font=\tiny,arrows={<->}]
+    ($(CMin.center)!0.3!(EsMaj.center)$)
+      -- ($(CMin.center)!0.7!(EsMaj.center)$)
+      node[midway,sloped,above,font=\tiny]{R-trans.};
+  \draw[red,font=\tiny,arrows={<->}]
+    ($(CMin.center)!0.3!(AsMaj.center)$)
+      -- ($(CMin.center)!0.7!(AsMaj.center)$)
+      node[midway,sloped,above,font=\tiny]{L-trans.};
 % \draw[red,arrows={->}] (D) to[bend left] (T);
 % \draw[blue,font=\tiny,arrows={->}] (Sm) -- (D) node[midway,sloped,above]{inv.~lead-tone};
 % \draw[blue,arrows={->}] (S) to[bend left] (T);
