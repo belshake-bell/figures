@@ -79,6 +79,9 @@ movelog:
 #	if [ -e $(TARGET).ilg ]; then mv $(TARGET).ilg ./logs; fi
 #	if [ -e $(TARGET).out ]; then mv $(TARGET).out ./logs; fi
 #	if [ -e $(TARGET).run.xml ]; then mv $(TARGET).run.xml ./logs; fi
+makelog:
+	git log --graph --date=short --all --pretty="format:(%C(yellow)%h) %C(cyan)%ad \"%C(green)%an\"%C(reset)%x09%C(red)%d%C(reset) %s" 1> "log_all.gitlog"
+	git log --graph --date=short       --pretty="format:(%C(yellow)%h) %C(cyan)%ad \"%C(green)%an\"%C(reset)%x09%C(red)%d%C(reset) %s" 1> "log.gitlog"
 
 clean:
 	rm -f $(DVITARGET)
