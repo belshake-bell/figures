@@ -6,6 +6,9 @@ MX2TARGET = $(addsuffix .mx2,$(TARGET))
 BIBTARGET = $(addsuffix .bbl,$(TARGET))
 MDXTARGET = $(addsuffix .ind,$(TARGET))
 DVIPDFMxOpt =# -f otf-up-yu-win10_mod #otf-up-sourcehan #
+LATEXOpt   := -interaction batchmode
+BIBEROpt    = -q
+UPMENDEXOpt = -q
 LOGSUFFIXES = .aux .log .toc .mx1 .mx2 .bcf .bbl .blg .idx .ind .ilg .out .run.xml
 LATEXENGINE := lualatex
 DVIWARE := dvipdfmx
@@ -31,20 +34,20 @@ ronbun.dvi: ronbun.tex ./ronbun/*.tex
 
 ifeq ($(LATEXENGINE),uplatex)
 %.dvi: %.tex
-	uplatex "$(notdir $<)"
-	if [ -e $(basename $(notdir $<)).mx1 ]; then $(MAKE) -B $(basename $(notdir $<)).mx2; uplatex $(notdir $<) ;fi
+	uplatex $(LATEXOpt) "$(notdir $<)"
+	if [ -e $(basename $(notdir $<)).mx1 ]; then $(MAKE) -B $(basename $(notdir $<)).mx2; uplatex $(LATEXOpt) $(notdir $<) ;fi
 	if [ -e $(basename $(notdir $<)).bcf ]; then $(MAKE) -B $(basename $(notdir $<)).bbl; fi
 	if [ -e $(basename $(notdir $<)).idx ]; then $(MAKE) -B $(basename $(notdir $<)).ind; fi
-	uplatex "$(notdir $<)"
-	uplatex "$(notdir $<)"
+	uplatex $(LATEXOpt) "$(notdir $<)"
+	uplatex $(LATEXOpt) "$(notdir $<)"
 	$(MAKE) movelog TARGET=$(basename $(notdir $<))
 else
 %.pdf: %.tex
-	$(LATEXENGINE) "$(notdir $<)"
-	if [ -e $(basename $(notdir $<)).mx1 ]; then $(MAKE) -B $(basename $(notdir $<)).mx2; $(LATEXENGINE) "$(notdir $<)" ;fi
+	$(LATEXENGINE) $(LATEXOpt) "$(notdir $<)"
+	if [ -e $(basename $(notdir $<)).mx1 ]; then $(MAKE) -B $(basename $(notdir $<)).mx2; $(LATEXENGINE) $(LATEXOpt) "$(notdir $<)" ;fi
 	if [ -e $(basename $(notdir $<)).bcf ]; then $(MAKE) -B $(basename $(notdir $<)).bbl; fi
 	if [ -e $(basename $(notdir $<)).idx ]; then $(MAKE) -B $(basename $(notdir $<)).ind; fi
-	$(LATEXENGINE) "$(notdir $<)"
+	$(LATEXENGINE) $(LATEXOpt) "$(notdir $<)"
 	$(MAKE) movelog TARGET=$(basename $(notdir $<))
 endif
 
@@ -55,10 +58,10 @@ endif
 	musixflx $(notdir $<)
 
 %.bbl: %.bcf
-	biber $(notdir $<)
+	biber $(BIBEROpt) $(notdir $<)
 
 %.ind: %.idx
-	upmendex -s gcmc.ist -d dictU.dic -f $(notdir $<)
+	upmendex $(UPMENDEXOpt) -s gcmc.ist -d dictU.dic -f $(notdir $<)
 
 movelog:
 	mkdir -p ./logs
