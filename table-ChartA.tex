@@ -1,0 +1,117 @@
+\documentclass[b5paper,openany]{standalone}
+\usepackage{luatexja-preset}
+\usepackage{gachimuchimacro}
+%\usepackage{tikz}
+%\usetikzlibrary{calc}
+
+\begin{document}
+\newcommand{\LSChMScale}[1]{\begingroup\Huge #1\endgroup}%
+\newcommand{\LSChMDegree}[1]{\begingroup\Large #1\endgroup}%
+\newcommand{\LSChMWidth}{10em}%
+\begin{tabular}{ccc}
+\parbox{8em}{\centering\textsc{Primary\\Modal\\Tonic\\Degree}}
+&\parbox{20em}{\centering\textsc{Primary Modal Genre}\\of\\a Lydian chromatic scale}
+&\parbox{8em}{\centering Alternate and\\Conceputual\\Modal Tonic\\Degree}
+\\ \hline
+  I&Major/Alt.~Major&(Vh)(IIh)(Ih)\\
+ II&Seventh/Alt.~Seventh&(+V)(VII)(III)(+IV)(IIh)(I)\\
+III&Major III\textsubscript{B}/Minor +5&(Vh Maj \subsc{3B})(IIh Maj.~flat7 \textsubscript{3B})\\
++IV&Minor Seventh \bFlat 5/Major +IV\subsc{B}&(VI)\\
+  V&Major V\subsc{B}&(Vh Maj \subsc{5B})(IIh Maj \subsc{5B})\\
+ VI&Minor/Alt.~Minor&(VIh)(+IV)(IIIh)(VIIh)\\
+VII&Major VII\subsc{B}/Eleventh \bFlat 9&(+V)(+IV)(II)\\
+ +V&Seventh +5&(II)(VII)(+IV)(III)
+\end{tabular}
+\begin{tabular}{ccccccc}
+\multicolumn{7}{c}{\textsc{the Seven Principal Scales}}\\
+\multicolumn{7}{c}{\textsc{of a Lydian Chromatic Scale and its Principal}}\\
+\multicolumn{7}{c}{\textsc{and sub-Principal Chordmodes}}\\
+\hline\\[0.5\baselineskip]%
+\multicolumn{7}{c}{\LSChMScale{Lydian Scale Chordmodes}}\\ \hline\\[0.5\baselineskip]%
+\parbox[t]{\LSChMWidth}{%
+  Lyd Maj 13th\\
+  Maj Triad\\
+  Maj 6th\\
+  Maj 7th\\
+  Maj 9th\\
+  Maj 7th \bFlat5%
+}
+  &\parbox[t]{\LSChMWidth}{%
+    13th\\
+    7th\\
+    9th\\
+    11th%
+  }
+  &\parbox[t]{\LSChMWidth}{%
+    Lyd Maj 13th/III\subsc{B}\\
+    Maj Triad/III\subsc{B}\\
+    Maj 6th/III\subsc{B}\\
+    Maj 7th/III\subsc{B}\\
+    Maj 9th/III\subsc{B}\\
+    Maj 7th \bFlat5/III\subsc{B}\\
+    (min +5)
+  }
+  &\parbox[t]{\LSChMWidth}{%
+    Lyd Maj 13th/+IV\subsc{B}\\
+    Min 7th \bFlat5\\
+    min 7th \bFlat5\bFlat9\\
+    min 11th \bFlat5\bFlat9\\
+    min 11th \bFlat5+5\bFlat9%
+  }
+  &\parbox[t]{\LSChMWidth}{%
+    Lyd Maj 13th/V\subsc{B}\\
+    Maj Triad/V\subsc{B}\\
+    Maj 6th/V\subsc{B}\\
+    Maj 7th/V\subsc{B}\\
+    Maj 9th/V\subsc{B}\\
+    Maj 7th \bFlat5/V\subsc{B}%
+  }
+  &\parbox[t]{\LSChMWidth}{%
+    min 13th\\
+    min Triad\\
+    min 6th\\
+    min 7th\\
+    min 9th\\
+    min 11th%
+  }
+  &\parbox[t]{\LSChMWidth}{%
+    Lyd Maj 13th/VII\subsc{B}\\
+    7th \bFlat9\\
+    11th \bFlat9\\
+    11th \bFlat9+5%
+  }
+\\
+\LSChMDegree{I}&\LSChMDegree{II}&\LSChMDegree{III}&\LSChMDegree{+IV}%
+  &\LSChMDegree{V}&\LSChMDegree{VI}&\LSChMDegree{VII}
+\\[2.5\baselineskip]%
+%
+\multicolumn{7}{c}{\LSChMScale{Lydian Aug.~Scale Chordmodes}}\\
+\hline\\[0.5\baselineskip]%
+\LSChMDegree{I}&\LSChMDegree{II}&\LSChMDegree{III}&\LSChMDegree{+IV}%
+  &\LSChMDegree{+V}&\LSChMDegree{VI}&\LSChMDegree{VII}
+\\[2.5\baselineskip]%
+\multicolumn{7}{c}{\LSChMScale{Lydian Dim~Scale Chordmodes}}\\
+\hline\\[0.5\baselineskip]%
+\LSChMDegree{I}&\LSChMDegree{II}&\LSChMDegree{\btxFlat III}&\LSChMDegree{+IV}%
+  &\LSChMDegree{V}&\LSChMDegree{VI}&\LSChMDegree{VII}
+\\[2.5\baselineskip]%
+\multicolumn{7}{c}{\LSChMScale{Lydian Flat 7th Scale Chordmodes}}\\
+\hline\\[0.5\baselineskip]%
+\LSChMDegree{I}&\LSChMDegree{II}&\LSChMDegree{III}&\LSChMDegree{+IV}%
+  &\LSChMDegree{V}&\LSChMDegree{VI}&\LSChMDegree{\btxFlat VII}
+\\[2.5\baselineskip]%
+\multicolumn{7}{c}{\LSChMScale{Aux.~Aug.~Scale Chordmodes}}\\
+\hline\\[0.5\baselineskip]%
+\LSChMDegree{I}&\LSChMDegree{II}&\LSChMDegree{III}&\LSChMDegree{+IV}%
+  &\LSChMDegree{+V}& \LSChMDegree{\btxFlat VII}&
+\\[2.5\baselineskip]%
+\multicolumn{7}{c}{\LSChMScale{Aux.~Dim.~Scale Chordmodes}}\\
+\hline\\[0.5\baselineskip]%
+\LSChMDegree{I}&\LSChMDegree{II}&\LSChMDegree{\btxFlat III\hfil IV}&\LSChMDegree{+IV}%
+  &\LSChMDegree{+V}&\LSChMDegree{VI}&\LSChMDegree{VII}
+\\[2.5\baselineskip]%
+\multicolumn{7}{c}{\LSChMScale{Aux.~Dim.~Blues Scale Chordmodes}}\\
+\LSChMDegree{I}&\LSChMDegree{\btxFlat II\hfil \btxFlat III}&\LSChMDegree{III}&\LSChMDegree{+IV}%
+  &\LSChMDegree{V}&\LSChMDegree{VI}&\LSChMDegree{\btxFlat VII}
+\end{tabular}
+\end{document}
