@@ -1,0 +1,38 @@
+\documentclass[b5paper,multi={tikzpicture}]{standalone}
+\usepackage{luatexja-preset}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{bellsmacros}
+\usepackage{gachimuchimacro}
+\expandafter\pgfrealjobname\expandafter{\jobname}
+\begin{document}
+\expandafter\beginpgfgraphicnamed\expandafter{\jobname-fig1}
+\begin{tikzpicture} % tikzpicture環境開始
+\def\OutsideCircRad{3.5cm}%
+\def\InsideCircRad{2.5cm}%
+\def\ArrowRad{2.2cm}%
+\def\LabelRad{3.0cm}%
+\foreach \angle / \label  in
+{%
+	 90/\Gni,
+	 60/\Gnv,
+	 30/\Gnii,
+	 0/\Gnvi,
+	 330/\Gniii,
+	 300/\Gnvii,
+	 270/\bSharp\Gniv,
+	 240/\bSharp\Gni,
+	 210/\bSharp\Gnv,
+	 180/\bFlat\Gniii,
+	 150/\bFlat\Gnvii,
+	 120/\Gniv
+}
+{%
+	\draw ($(\angle:0cm)! \InsideCircRad!15: (\angle:2.0cm)$) -- ($(\angle:0cm)! \OutsideCircRad!15: (\angle:2.0cm)$) ;
+	\node at (\angle:\LabelRad) {\label};
+};
+\draw (0,0) circle [radius=\OutsideCircRad];
+\draw (0,0) circle [radius=\InsideCircRad];
+\draw[-Stealth] (120:\ArrowRad) arc [radius=\ArrowRad, start angle=120, delta angle=330];
+\end{tikzpicture} % tikzpicture環境終了
+\end{document}
