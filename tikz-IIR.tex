@@ -8,19 +8,45 @@
 \usetikzlibrary{shapes.geometric}
 \begin{document}
 \begin{tikzpicture}[scale=1]
-  \tikzset{every node/.style={shape=circle,font=\small,text centered,inner sep=0pt,minimum size=0.5cm}};
-  \node [isosceles triangle, draw] (a0) {$a_0$};
-  \node [isosceles triangle, draw, below=of a0] (a1) {$a_1$};
-  \node [isosceles triangle, draw, below=of a1] (a2) {$a_2$};
-  \node [isosceles triangle, draw, below=of a2] (a3) {$a_3$};
-  \node [isosceles triangle, draw, below=of a3] (a4) {$a_4$};
-  \node [isosceles triangle, draw, below=of a4] (an) {$a_n$};
-  \path[draw] ($(a0)+(-3cm,0)$) -- +(1cm,0) coordinate (con0) [fill]circle(1pt) [arrows=->]edge (a0.west);
-  \path[draw] ($(a1)+(-2cm,0)$) coordinate (con1) [fill]circle(1pt) [arrows=->]edge (a1.west);
-  \path[draw] ($(a2)+(-2cm,0)$) coordinate (con2) [fill]circle(1pt) [arrows=->]edge (a2.west);
-  \path[draw] ($(a3)+(-2cm,0)$) coordinate (con3) [fill]circle(1pt) [arrows=->]edge (a3.west);
-  \path[draw] ($(a4)+(-2cm,0)$) coordinate (con4) [fill]circle(1pt) [arrows=->]edge (a4.west);
-  \path[draw] ($(an)+(-2cm,0)$) coordinate (conn) [fill]circle(1pt) [arrows=->]edge (an.west);
-  \path[draw]  ($(con0)!0.5!(con1)$) node[draw,rectangle] {$z^{-1}$};
+  \tikzset{%
+    every node/.style={shape=circle,font=\small,text centered,inner sep=0pt,minimum size=0.5cm}%
+    , myarrow/.style={arrows=-{Stealth[]}}%
+    , Tap/.style={shape=rectangle,font=\small,text centered,inner sep=0pt,minimum size=0.5cm}%
+    , adder/.style={shape=circle,font=\small,text centered,inner sep=0pt,minimum size=0.5cm}%
+  };
+  \path coordinate (Start) {};
+  \path node [isosceles triangle, draw, right=2cm of Start] (a0) {$a_0$};
+  \path node [isosceles triangle, draw, below=1cm of a0]    (a1) {$a_1$};
+  \path node [isosceles triangle, draw, below=1cm of a1]    (a2) {$a_2$};
+  \path node [isosceles triangle, draw, below=1cm of a2]    (a3) {$a_3$};
+  \path node [isosceles triangle, draw, below=1cm of a3]    (a4) {$a_4$};
+  \path coordinate [below=1cm of a4]    (a5) {};
+  \path node [isosceles triangle, draw, below=1cm of a5]    (an) {$a_n$};
+  \path[draw] coordinate[left=1cm of a0] (con0) (con0) [fill]circle(1pt) edge[myarrow] (a0.west);
+  \path[draw] coordinate[left=1cm of a1] (con1) (con1) [fill]circle(1pt) edge[myarrow] (a1.west);
+  \path[draw] coordinate[left=1cm of a2] (con2) (con2) [fill]circle(1pt) edge[myarrow] (a2.west);
+  \path[draw] coordinate[left=1cm of a3] (con3) (con3) [fill]circle(1pt) edge[myarrow] (a3.west);
+  \path[draw] coordinate[left=1cm of a4] (con4) (con4) [fill]circle(1pt) edge[myarrow] (a4.west);
+  \path[draw] coordinate[left=1cm of an] (conN);
+  \path coordinate (con5) at ($(con4)!0.5!(conN)$);
+  \path[draw] (Start) -- (con0);
+  \path[draw]  ($(con0)!0.5!(con1)$) node[draw,Tap] (left1thTap) {$z^{-1}$};
+    \path[draw] (con0) edge[myarrow] (left1thTap.north);
+  \path[draw]  ($(con1)!0.5!(con2)$) node[draw,Tap] (left2thTap) {$z^{-1}$};
+    \path[draw] (left1thTap.south) edge[myarrow] (left2thTap.north);
+  \path[draw]  ($(con2)!0.5!(con3)$) node[draw,Tap] (left3thTap) {$z^{-1}$};
+    \path[draw] (left2thTap.south) edge[myarrow] (left3thTap.north);
+  \path[draw]  ($(con3)!0.5!(con4)$) node[draw,Tap] (left4thTap) {$z^{-1}$};
+    \path[draw] (left3thTap.south) edge[myarrow] (left4thTap.north);
+  \path[draw]  ($(con4)!0.5!(con5)$) node[draw,Tap] (left5thTap) {$z^{-1}$};
+    \path[draw] (left4thTap.south) edge[myarrow] (left5thTap.north);
+  \path[draw]  ($(con5)!0.5!(conN)$) node[draw,Tap] (leftNthTap) {$z^{-1}$};
+    \path[draw] (left5thTap.south) edge[myarrow, dashed] (leftNthTap.north);
+    \path[draw, myarrow] (leftNthTap.south) -- (conN) -- (an.west);
+  \foreach \ak/\adderk in {a0/adder0, a1/adder1, a2/adder2, a3/adder3, a4/adder4}
+    \path node 
+    [adder, draw, right=1cm of \ak.center] (\adderk) {$+$}
+    [draw] (\ak.east) edge[myarrow] (\adderk.west)
+  ;
 \end{tikzpicture}
 \end{document}
